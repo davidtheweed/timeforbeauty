@@ -1,0 +1,3382 @@
+/* ========================================
+   ADMIN LOGIN SECTION STYLES
+   ======================================== */
+
+.admin-login-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    color: white;
+}
+
+.admin-login-section p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.admin-login-btn {
+    background: linear-gradient(135deg, #ff9ec7 0%, #ff6b9d 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin: 0 auto;
+}
+
+.admin-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff9ec7 100%);
+}
+
+.admin-login-btn:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   LOADING SCREEN STYLES
+   ======================================== */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.3s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f0f0f0;
+    border-top: 4px solid #ff9ec7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-content h2 {
+    color: #333;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.loading-content p {
+    color: #666;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Mini auth loading indicator */
+.auth-loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.mini-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f0f0f0;
+    border-top: 2px solid #ff9ec7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   SERVICE SELECTION STYLES
+   ======================================== */
+
+.service-selection {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    background: #fafafa;
+}
+
+.service-category {
+    margin-bottom: 20px;
+}
+
+.service-category:last-child {
+    margin-bottom: 0;
+}
+
+.service-category h4 {
+    margin: 0 0 10px 0;
+    padding: 8px 12px;
+    background: #6c5ce7;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.service-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 8px;
+}
+
+.service-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.service-option:hover {
+    border-color: #6c5ce7;
+    background: #f8f7ff;
+}
+
+.service-option input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.service-option input[type="checkbox"]:checked + .service-name {
+    color: #6c5ce7;
+    font-weight: 600;
+}
+
+.service-name {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.service-price {
+    font-size: 13px;
+    color: #6c5ce7;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.selected-services {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f0f8ff;
+    border: 1px solid #6c5ce7;
+    border-radius: 8px;
+}
+
+.selected-services h5 {
+    margin: 0 0 10px 0;
+    color: #6c5ce7;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.selected-service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.selected-service-item:last-child {
+    border-bottom: none;
+}
+
+.service-details {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+}
+
+.total-price {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #6c5ce7;
+    text-align: right;
+    font-size: 16px;
+    color: #6c5ce7;
+}
+
+/* ========================================
+   TOUCH-FRIENDLY BUTTON STYLES
+   ======================================== */
+
+/* Global touch improvements */
+button, .btn {
+    touch-action: manipulation; /* Disable double-tap zoom */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+    -webkit-touch-callout: none; /* Disable callout on iOS */
+    cursor: pointer;
+    user-select: none;
+    min-height: 44px; /* Minimum touch target size */
+    min-width: 44px;
+}
+
+/* Specific button touch improvements */
+.show-calendar-btn,
+.register-user-btn,
+.add-task-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    z-index: 10;
+}
+
+/* Ensure minimum touch target size */
+@media (max-width: 768px) {
+    button, .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* ========================================
+   FORGOT PASSWORD STYLES
+   ======================================== */
+
+.forgot-password-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forgot-password-btn {
+    background: none;
+    border: none;
+    color: #6c5ce7;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-btn:hover {
+    color: #5a4fcf;
+}
+
+.forgot-password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.forgot-password-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.forgot-password-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.forgot-password-header h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.forgot-password-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.forgot-password-form {
+    margin-bottom: 20px;
+}
+
+.forgot-password-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.forgot-password-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.forgot-password-actions .cancel-btn {
+    background: #f1f1f1;
+    color: #666;
+}
+
+.forgot-password-actions .cancel-btn:hover {
+    background: #e0e0e0;
+}
+
+.forgot-password-actions .send-btn {
+    background: #6c5ce7;
+    color: white;
+}
+
+.forgot-password-actions .send-btn:hover {
+    background: #5a4fcf;
+}
+
+.forgot-password-actions .send-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ========================================
+   LOGIN STYLES
+   ======================================== */
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 20px;
+}
+
+.login-content {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header .brand-title {
+    font-family: 'Parisienne', cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #000000;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-header p {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.login-form {
+    margin-bottom: 20px;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    color: #333;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #ff9ec7;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 158, 199, 0.1);
+    transform: translateY(-2px);
+}
+
+.login-form .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 158, 199, 0.3);
+}
+
+.login-form .submit-btn:hover {
+    background: linear-gradient(135deg, #ff6bb3, #ff4a9e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 158, 199, 0.4);
+}
+
+.login-form .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========================================
+   HEADER STYLES
+   ======================================== */
+
+.main-header {
+    background: linear-gradient(135deg, #ff9ec7, #ffb3d1);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 100;
+    border-radius: 20px;
+}
+
+.brand-title {
+    font-family: 'Parisienne', cursive;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: white;
+    margin: 0 0 0 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.admin-login-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.admin-login-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Reset i osnovni stilovi */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+header {
+    background: #ffffff;
+    padding: 40px 30px;
+    text-align: center;
+    color: #333;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.appointment-form {
+    padding: 40px 30px 60px 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group:has(.worker-selection) {
+    margin-bottom: 40px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    color: #333;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #ff9ec7;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 158, 199, 0.1);
+    transform: translateY(-2px);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+select {
+    cursor: pointer;
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9ec7 0%, #ff6bb3 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 107, 179, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.message {
+    margin: 20px 30px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive dizajn */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        border-radius: 15px;
+    }
+    
+    header {
+        padding: 30px 20px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .appointment-form {
+        padding: 30px 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+    
+    .submit-btn {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    /* Swipe-friendly calendar styles */
+    .calendar-widget,
+    .planner-calendar {
+        touch-action: pan-y; /* Allow vertical scroll but handle horizontal swipe */
+        user-select: none; /* Prevent text selection during swipe */
+    }
+    
+    .calendar-header button {
+        min-width: 44px; /* Minimum touch target size */
+        min-height: 44px;
+    }
+    
+    /* Touch-friendly button styles */
+    button, .btn {
+        min-height: 44px; /* Minimum touch target size */
+        touch-action: manipulation; /* Disable double-tap zoom */
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+    }
+    
+    /* Specific button improvements */
+    .show-calendar-btn,
+    .register-user-btn,
+    .add-task-btn,
+    .submit-btn {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 12px 16px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    .appointment-form {
+        padding: 25px 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+}
+
+/* Animacije */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Loading animacija */
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.btn-loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* ========================================
+   DROPDOWN KALENDAR STILOVI
+   ======================================== */
+
+.date-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.date-input-container input[type="text"] {
+    width: 100%;
+    padding: 15px 45px 15px 15px;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    color: #333;
+    cursor: pointer;
+}
+
+.date-input-container input[type="text"]:focus {
+    outline: none;
+    border-color: #ff9ec7;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 158, 199, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Novi kalendar widget */
+.date-picker-container {
+    position: relative;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ff9ec7;
+}
+
+.calendar-widget {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #ff9ec7;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 12px;
+    margin-top: 5px;
+    min-width: 100%;
+    overflow: hidden;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.calendar-header button {
+    background: #ff9ec7;
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-header button:hover {
+    background: #ff6bb3;
+}
+
+.calendar-header span {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+}
+
+.day-header {
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    padding: 6px 2px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+.calendar-dates {
+    display: contents;
+}
+
+.calendar-date {
+    text-align: center;
+    padding: 6px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.calendar-date:hover {
+    background: #ff9ec7;
+    color: white;
+}
+
+.calendar-date.selected {
+    background: #ff6bb3;
+    color: white;
+    font-weight: 600;
+}
+
+.calendar-date.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-date.disabled:hover {
+    background: transparent;
+    color: #ccc;
+}
+
+.calendar-date.past {
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.calendar-date.past:hover {
+    background: transparent;
+    color: #ccc;
+}
+
+.calendar-date.booked {
+    background: #ff6b6b;
+    color: white;
+    font-weight: 600;
+}
+
+.calendar-date.booked:hover {
+    background: #ff5252;
+    color: white;
+}
+
+.calendar-date.empty {
+    cursor: default;
+}
+
+.calendar-date.empty:hover {
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .calendar-widget {
+        padding: 8px;
+    }
+    
+    .calendar-header {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+    }
+    
+    .calendar-header button {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    
+    .calendar-header span {
+        font-size: 0.85rem;
+    }
+    
+    .calendar-days {
+        gap: 2px;
+    }
+    
+    .day-header {
+        font-size: 0.7rem;
+        padding: 4px 1px;
+        letter-spacing: 0.1px;
+    }
+    
+    .calendar-date {
+        font-size: 0.75rem;
+        padding: 4px 1px;
+    }
+}
+
+/* Time picker widget */
+.time-picker-container {
+    position: relative;
+}
+
+.time-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ff9ec7;
+}
+
+.time-picker-widget {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #ff9ec7;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 8px;
+    margin-top: 5px;
+    max-height: 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 100%;
+}
+
+.time-header {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.time-header span {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.75rem;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+}
+
+.time-slot {
+    text-align: center;
+    padding: 6px 4px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: #f8f9fa;
+    color: #333;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.time-slot:hover {
+    background: #ff9ec7;
+    color: white;
+    transform: scale(1.05);
+}
+
+.time-slot.selected {
+    background: #ff6bb3;
+    color: white;
+    font-weight: 600;
+    border-color: #ff6bb3;
+}
+
+.time-slot.busy {
+    background: #ff6b6b !important;
+    color: white !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+}
+
+.time-slot.busy:hover {
+    background: #ff6b6b !important;
+    color: white !important;
+    transform: none !important;
+}
+
+.time-slot.disabled {
+    background: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.time-slot.disabled:hover {
+    background: #e9ecef;
+    color: #6c757d;
+    transform: none;
+}
+
+.time-slot.duration-disabled {
+    background: #fff3cd;
+    color: #856404;
+    cursor: not-allowed;
+    opacity: 0.7;
+    border: 1px solid #ffeaa7;
+}
+
+.time-slot.duration-disabled:hover {
+    background: #fff3cd;
+    color: #856404;
+    transform: none;
+    border: 1px solid #ffeaa7;
+}
+
+.time-slot.preview-blocked {
+    background: #fff3cd;
+    color: #856404;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.time-slot.preview-blocked:hover {
+    background: #fff3cd;
+    color: #856404;
+    transform: none;
+}
+
+.time-slot.booked {
+    background: #ff6b6b !important;
+    color: white !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+}
+
+.time-slot.booked:hover {
+    background: #ff6b6b !important;
+    color: white !important;
+    transform: none !important;
+}
+
+@media (max-width: 768px) {
+    .time-picker-widget {
+        padding: 6px;
+        max-height: 200px;
+    }
+    
+    .time-header {
+        margin-bottom: 5px;
+        padding-bottom: 4px;
+    }
+    
+    .time-header span {
+        font-size: 0.7rem;
+    }
+    
+    .time-slots {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+    }
+    
+    .time-slot {
+        font-size: 0.7rem;
+        padding: 5px 3px;
+    }
+    
+    /* Header responsive */
+    .main-header {
+        padding: 12px 20px;
+        border-radius: 18px;
+    }
+    
+    .brand-title {
+        font-size: 1.8rem;
+        margin: 0 0 0 15px;
+    }
+    
+    .admin-login-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+    
+    .container {
+        margin: 20px auto 0;
+    }
+}
+
+/* Modal stilovi */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #ff9ec7 0%, #ff6bb3 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.close:hover {
+    opacity: 0.7;
+}
+
+.modal form {
+    padding: 30px;
+}
+
+.modal .form-group {
+    margin-bottom: 20px;
+}
+
+.modal .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.modal .form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.modal .form-group input:focus {
+    outline: none;
+    border-color: #ff9ec7;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 158, 199, 0.1);
+}
+
+.modal .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.modal .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 179, 0.3);
+}
+
+
+/* ========================================
+   ADMIN PLANNER STYLES
+   ======================================== */
+
+.admin-planner {
+    max-width: 1200px;
+    margin: 30px auto 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.planner-header {
+    background: linear-gradient(135deg, #ff9ec7 0%, #ff6bb3 100%);
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.planner-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+.planner-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.add-task-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+}
+
+.add-task-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.logout-btn {
+    background: rgba(220, 53, 69, 0.8);
+    color: white;
+    border: 2px solid rgba(220, 53, 69, 0.9);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+.logout-btn:hover {
+    background: rgba(220, 53, 69, 1);
+    border-color: rgba(220, 53, 69, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.back-btn {
+    background: rgba(108, 117, 125, 0.8);
+    color: white;
+    border: 2px solid rgba(108, 117, 125, 0.9);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+
+.back-btn:hover {
+    background: rgba(108, 117, 125, 1);
+    border-color: rgba(108, 117, 125, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.planner-content {
+    padding: 30px;
+}
+
+.planner-navigation {
+    margin-bottom: 30px;
+}
+
+.month-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.month-display h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    min-width: 200px;
+    text-align: center;
+}
+
+.nav-btn {
+    background: #ff9ec7;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    background: #ff6bb3;
+    transform: scale(1.1);
+}
+
+/* Current Date Display */
+.current-date-display {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.current-date-display span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff6bb3;
+    background: rgba(255, 107, 179, 0.1);
+    padding: 8px 20px;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+/* Calendar Button Container */
+.calendar-button-container {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.show-calendar-btn {
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 158, 199, 0.3);
+}
+
+.show-calendar-btn:hover {
+    background: linear-gradient(135deg, #ff6bb3, #ff4a9e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 158, 199, 0.4);
+}
+
+/* Calendar Modal */
+.calendar-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+/* Registration Modal */
+.registration-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.registration-modal-content {
+    background-color: white;
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.registration-modal-header {
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.registration-modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.registration-modal-close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.registration-modal-close:hover {
+    color: #ff4a9e;
+    transform: scale(1.1);
+}
+
+.registration-modal form {
+    padding: 30px;
+}
+
+.register-user-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.register-user-btn:hover {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.calendar-modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+.calendar-modal-header {
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.calendar-modal-close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-modal-close:hover {
+    color: #ff4a9e;
+    transform: scale(1.1);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive kalendar za mobilne uređaje */
+@media (max-width: 768px) {
+    .calendar-modal-content {
+        margin: 2% auto;
+        width: 95%;
+        max-width: none;
+        border-radius: 15px;
+    }
+    
+    .calendar-modal-header {
+        padding: 15px 20px;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .calendar-modal-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .planner-calendar {
+        padding: 15px;
+    }
+    
+    .planner-calendar-header {
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+    
+    .planner-nav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    
+    #plannerMonthYear {
+        font-size: 1rem;
+    }
+    
+    .planner-calendar-days {
+        gap: 3px;
+    }
+    
+    .planner-day-header {
+        padding: 6px 2px;
+        font-size: 0.7rem;
+    }
+    
+    .planner-calendar-date {
+        padding: 8px 2px;
+        font-size: 0.8rem;
+        min-height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-modal-content {
+        margin: 1% auto;
+        width: 98%;
+        border-radius: 10px;
+    }
+    
+    .calendar-modal-header {
+        padding: 12px 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .calendar-modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .calendar-modal-close {
+        font-size: 24px;
+    }
+    
+    .planner-calendar {
+        padding: 10px;
+    }
+    
+    .planner-calendar-header {
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+    }
+    
+    .planner-nav-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    #plannerMonthYear {
+        font-size: 0.9rem;
+    }
+    
+    .planner-calendar-days {
+        gap: 2px;
+    }
+    
+    .planner-day-header {
+        padding: 4px 1px;
+        font-size: 0.65rem;
+    }
+    
+    .planner-calendar-date {
+        padding: 6px 1px;
+        font-size: 0.75rem;
+        min-height: 28px;
+    }
+    
+    .show-calendar-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+/* Planner Calendar Container */
+.planner-calendar-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.planner-calendar {
+    background: white;
+    border: none;
+    border-radius: 0 0 20px 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.planner-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.planner-nav-btn {
+    background: #ff9ec7;
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.planner-nav-btn:hover {
+    background: #ff6bb3;
+    transform: scale(1.1);
+}
+
+#plannerMonthYear {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.planner-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    grid-template-rows: auto auto;
+    align-items: stretch;
+    min-height: 300px;
+}
+
+.planner-day-header {
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    padding: 8px 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.planner-calendar-dates {
+    display: contents;
+}
+
+.planner-calendar-date {
+    text-align: center;
+    padding: 8px 4px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+.planner-calendar-date:hover {
+    background: #ff9ec7;
+    color: white;
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.planner-calendar-date.selected {
+    background: #ff6bb3;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 107, 179, 0.3);
+}
+
+.planner-calendar-date.has-appointments {
+    background: #e8f5e8;
+    color: #2d5a2d;
+    font-weight: 600;
+}
+
+.planner-calendar-date.has-appointments:hover {
+    background: #d4edda;
+    color: #155724;
+}
+
+.planner-calendar-date.has-appointments.selected {
+    background: #28a745;
+    color: white;
+}
+
+.planner-calendar-date.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.planner-calendar-date.disabled:hover {
+    background: transparent;
+    color: #ccc;
+    transform: none;
+}
+
+.planner-calendar-date.empty {
+    cursor: default;
+}
+
+.planner-calendar-date.empty:hover {
+    background: transparent;
+    transform: none;
+}
+
+.date-number {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.appointment-badges {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: flex;
+    gap: 2px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.appointment-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    font-size: 8px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.radnik1-badge {
+    background: #d4af37;
+}
+
+.radnik2-badge {
+    background: #3498db;
+}
+
+@keyframes activePulse {
+    0% {
+        transform: translateY(-2px) scale(1);
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+        transform: translateY(-2px) scale(1.08);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+    }
+    100% {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+}
+
+.day-btn.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: slideHighlight 0.6s ease-out;
+}
+
+@keyframes slideHighlight {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.day-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.day-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.day-btn.active .day-name {
+    font-weight: 700;
+    transform: scale(1.1);
+    animation: textBounce 0.4s ease-out;
+}
+
+.day-btn.active .day-number {
+    font-weight: 800;
+    transform: scale(1.15);
+    animation: textBounce 0.4s ease-out 0.1s;
+}
+
+@keyframes textBounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.daily-view {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    min-height: 400px;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.day-header h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0;
+}
+
+.selected-date-display {
+    color: #666;
+    font-size: 1rem;
+}
+
+.tasks-container {
+    margin-top: 20px;
+}
+
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.task-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    transition: all 0.3s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.task-item.completed {
+    opacity: 0.7;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+}
+
+.task-item.completed::before {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.task-time-badge {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    min-width: 80px;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.task-item.completed .task-time-badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.task-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.task-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.task-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.task-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    line-height: 1.4;
+}
+
+.task-description {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-left: 32px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.task-action-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.complete-btn:hover {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: white;
+}
+
+.no-tasks {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(168, 85, 247, 0.02));
+    border-radius: 20px;
+    border: 2px dashed rgba(139, 92, 246, 0.2);
+}
+
+.no-tasks-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+.no-tasks-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 8px;
+}
+
+.no-tasks-subtitle {
+    font-size: 1rem;
+    color: #9ca3af;
+    line-height: 1.5;
+}
+
+.task-block {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #ff9ec7;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.task-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.task-block.completed {
+    border-left-color: #28a745;
+    background: #f8fff8;
+}
+
+.task-block.completed .task-title {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.task-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ff6bb3;
+    background: rgba(255, 107, 179, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.task-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    flex: 1;
+    margin-left: 15px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.task-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.task-action-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.complete-btn {
+    color: #28a745;
+}
+
+.complete-btn:hover {
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.delete-btn {
+    color: #dc3545;
+}
+
+.delete-btn:hover {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.task-description {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+.no-tasks {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.no-tasks h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.no-tasks p {
+    font-size: 1rem;
+}
+
+/* Task Modal Styles */
+.task-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.task-modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+.task-modal-header {
+    background: linear-gradient(135deg, #ff9ec7 0%, #ff6bb3 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.task-modal-close {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.task-modal-close:hover {
+    opacity: 0.7;
+}
+
+.task-modal form {
+    padding: 25px;
+}
+
+.task-modal .form-group {
+    margin-bottom: 20px;
+}
+
+.task-modal .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.task-modal .form-group input,
+.task-modal .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.task-modal .form-group input:focus,
+.task-modal .form-group textarea:focus {
+    outline: none;
+    border-color: #ff9ec7;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 158, 199, 0.1);
+}
+
+.task-modal .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.task-modal .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 179, 0.3);
+}
+
+/* Responsive admin panel */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+    }
+    
+    .admin-login-btn {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-top: 20px;
+        display: inline-block;
+    }
+    
+    /* Planner responsive */
+    .admin-planner {
+        margin: 20px auto 0;
+    }
+    
+    .planner-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .planner-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .planner-content {
+        padding: 20px;
+    }
+    
+    .month-display {
+        gap: 15px;
+    }
+    
+    .month-display h3 {
+        font-size: 1.3rem;
+        min-width: 150px;
+    }
+    
+    .nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .day-navigation-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .day-nav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    
+    .days-navigation {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .day-btn {
+        flex: 1;
+        min-width: calc(50% - 4px);
+        padding: 10px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .current-date-display span {
+        font-size: 1rem;
+        padding: 6px 15px;
+    }
+    
+    .daily-view {
+        padding: 20px;
+    }
+    
+    .day-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .task-block {
+        padding: 15px;
+    }
+    
+    .task-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .task-title {
+        margin-left: 0;
+    }
+    
+    .task-actions {
+        align-self: flex-end;
+    }
+    
+    /* Task Modal Mobile Scroll */
+    .task-modal-content {
+        margin: 5% auto;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .task-modal form {
+        padding: 20px;
+        min-height: auto;
+    }
+    
+    /* Registration Modal Mobile Scroll */
+    .registration-modal-content {
+        margin: 5% auto;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .registration-modal form {
+        padding: 20px;
+        min-height: auto;
+    }
+    
+    /* Mobile scroll styling - Hidden scrollbar */
+    .task-modal-content::-webkit-scrollbar,
+    .registration-modal-content::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+    
+    .task-modal-content::-webkit-scrollbar-track,
+    .registration-modal-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .task-modal-content::-webkit-scrollbar-thumb,
+    .registration-modal-content::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+    
+    /* Firefox - hide scrollbar */
+    .task-modal-content,
+    .registration-modal-content {
+        scrollbar-width: none;
+    }
+    
+    /* Header controls responsive */
+    .header-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* Admin login section responsive */
+    .admin-login-section {
+        padding: 30px 15px;
+        margin: 15px 10px;
+        border-radius: 12px;
+    }
+    
+    .admin-login-section p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    
+    .admin-login-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+        min-height: 45px;
+        width: 100%;
+        max-width: 280px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    /* Task Modal for very small screens */
+    .task-modal-content {
+        margin: 2% auto;
+        width: 98%;
+        max-height: 95vh;
+        border-radius: 10px;
+    }
+    
+    .task-modal-header {
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .task-modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .task-modal form {
+        padding: 15px;
+    }
+    
+    .task-modal .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .task-modal .form-group input,
+    .task-modal .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Registration Modal for very small screens */
+    .registration-modal-content {
+        margin: 2% auto;
+        width: 98%;
+        max-height: 95vh;
+        border-radius: 10px;
+    }
+    
+    .registration-modal-header {
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .registration-modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .registration-modal form {
+        padding: 15px;
+    }
+    
+    /* Improved touch targets */
+    .task-modal .submit-btn,
+    .registration-modal .register-user-btn {
+        padding: 15px 20px;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    /* Better spacing for small screens */
+    .task-modal .form-group label,
+    .registration-modal .form-group label {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+}
+
+/* ========================================
+   LOGIN FORM RESPONSIVE STYLES
+   ======================================== */
+
+/* Mobile login styles */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 15px;
+    }
+    
+    .login-content {
+        padding: 30px 20px;
+        max-width: 100%;
+        margin: 0 10px;
+    }
+    
+    .login-header .brand-title {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+    
+    .login-header p {
+        font-size: 0.9rem;
+    }
+    
+    .login-form .form-group {
+        margin-bottom: 18px;
+    }
+    
+    .login-form label {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+    
+    .login-form input {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .login-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+    
+    .forgot-password {
+        font-size: 0.85rem;
+    }
+}
+
+/* Extra small mobile devices - login */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+    
+    .login-content {
+        padding: 25px 15px;
+        border-radius: 15px;
+        margin: 0 5px;
+    }
+    
+    .login-header {
+        margin-bottom: 25px;
+    }
+    
+    .login-header .brand-title {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+        line-height: 1.2;
+    }
+    
+    .login-header p {
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+    
+    .login-form .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .login-form label {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+    
+    .login-form input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+    }
+    
+    .login-btn {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+        min-height: 50px;
+        border-radius: 10px;
+    }
+    
+    .forgot-password {
+        font-size: 0.8rem;
+        margin-top: 15px;
+    }
+    
+    /* Admin login section - extra small mobile */
+    .admin-login-section {
+        padding: 25px 12px;
+        margin: 10px 5px;
+        border-radius: 10px;
+    }
+    
+    .admin-login-section p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+    
+    .admin-login-btn {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+        min-height: 48px;
+        max-width: 260px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/* Very small screens - login */
+@media (max-width: 360px) {
+    .login-header .brand-title {
+        font-size: 1.6rem;
+        line-height: 1.1;
+    }
+    
+    .login-content {
+        padding: 20px 12px;
+        margin: 0 2px;
+    }
+    
+    .login-form input {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .login-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+        min-height: 46px;
+    }
+    
+    /* Admin login section - very small screens */
+    .admin-login-section {
+        padding: 20px 10px;
+        margin: 8px 2px;
+        border-radius: 8px;
+    }
+    
+    .admin-login-section p {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+        line-height: 1.2;
+    }
+    
+    .admin-login-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        min-height: 44px;
+        max-width: 240px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/* ========================================
+   PLANNER TABLE STYLES
+   ======================================== */
+
+.planner-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.planner-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.planner-table thead {
+    background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+    color: white;
+}
+
+.planner-table th {
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.planner-table th:last-child {
+    border-right: none;
+    text-align: center;
+}
+
+.planner-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.planner-table tbody tr:hover {
+    background-color: #fafafa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.planner-table td {
+    padding: 12px;
+    vertical-align: middle;
+    border-right: 1px solid #f0f0f0;
+}
+
+.planner-table td:last-child {
+    border-right: none;
+    text-align: center;
+}
+
+.time-cell {
+    font-weight: 600;
+    color: #ff6bb3;
+    font-size: 0.85rem;
+    min-width: 100px;
+}
+
+
+.name-cell {
+    font-weight: 500;
+    color: #333;
+    min-width: 150px;
+}
+
+.service-cell {
+    color: #666;
+    font-size: 0.85rem;
+    min-width: 100px;
+}
+
+.email-cell {
+    color: #666;
+    font-size: 0.85rem;
+    min-width: 180px;
+}
+
+.phone-cell {
+    color: #666;
+    font-size: 0.85rem;
+    min-width: 120px;
+}
+
+.notes-cell {
+    color: #666;
+    font-size: 0.85rem;
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+.actions-cell {
+    min-width: 100px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    padding: 6px 8px;
+    margin: 0 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.edit-btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 40px;
+    background-color: #fafafa;
+}
+
+/* Responsive table */
+@media (max-width: 1200px) {
+    .planner-table-container {
+        overflow-x: auto;
+    }
+    
+    .planner-table {
+        min-width: 800px;
+    }
+    
+    .planner-table th,
+    .planner-table td {
+        padding: 10px 8px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .planner-table th,
+    .planner-table td {
+        padding: 8px 6px;
+        font-size: 0.75rem;
+    }
+    
+    .time-cell,
+    .service-cell,
+    .phone-cell {
+        min-width: 80px;
+    }
+    
+    .name-cell {
+        min-width: 120px;
+    }
+    
+    .email-cell {
+        min-width: 140px;
+    }
+    
+    .notes-cell {
+        max-width: 150px;
+    }
+}
+
+/* ========================================
+   ERROR MESSAGES
+======================================== */
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.error-message:before {
+    content: '⚠️';
+    margin-right: 8px;
+}
+
+/* ========================================
+   APPOINTMENT CARDS STYLES
+   ======================================== */
+
+.appointment-cards-container {
+    margin-top: 0;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.appointment-card {
+    background: #fff;
+    border: 1px solid #e1e5e9;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: slideInUp 0.5s ease-out;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.appointment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.appointment-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.appointment-card-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.appointment-status {
+    background: #e8f5e8;
+    color: #2d5a2d;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.cancel-appointment-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cancel-appointment-btn:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+.cancel-appointment-btn:active {
+    transform: translateY(0);
+}
+
+.appointment-card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.appointment-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.appointment-notes {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+}
+
+.appointment-notes .detail-value {
+    font-weight: 400;
+    line-height: 1.5;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .appointment-card-content {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* ========================================
+   WORKER SELECTION CARDS
+======================================== */
+
+.worker-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.worker-card {
+    background: #fff;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.worker-card:hover {
+    border-color: #d4af37;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+    transform: translateY(-2px);
+}
+
+.worker-card.selected {
+    border-color: #d4af37;
+    background: linear-gradient(135deg, #fff 0%, #fef9e7 100%);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+}
+
+.worker-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.worker-initial {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.worker-info {
+    flex: 1;
+}
+
+.worker-info h3 {
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.worker-info p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.worker-check {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.worker-check input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.worker-check label {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #bdc3c7;
+    border-radius: 50%;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.worker-check label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d4af37;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease;
+}
+
+.worker-check input[type="radio"]:checked + label {
+    border-color: #d4af37;
+    background: #fff;
+}
+
+.worker-check input[type="radio"]:checked + label:after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.worker-card.selected .worker-check label {
+    border-color: #d4af37;
+}
+
+/* Mobile responsiveness for worker cards */
+@media (max-width: 768px) {
+    .worker-selection {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .worker-card {
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .worker-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .worker-initial {
+        font-size: 14px;
+    }
+    
+    .worker-info h3 {
+        font-size: 15px;
+    }
+    
+    .worker-info p {
+        font-size: 12px;
+    }
+}

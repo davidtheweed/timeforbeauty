@@ -1,0 +1,27 @@
+{
+  "name": "appointment-booking-website",
+  "version": "1.0.0",
+  "description": "Jednostavna web stranica za zakazivanje termina sa Supabase backend-om",
+  "main": "login.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "dev": "npx live-server --port=3000 --open=/login.html"
+  },
+  "keywords": [
+    "appointment",
+    "booking",
+    "supabase",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  }
+}

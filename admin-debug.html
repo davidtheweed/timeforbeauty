@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 20px; margin: 5px; }
+        pre { background: #f8f9fa; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Admin Debug Test</h1>
+    
+    <div class="debug-section info">
+        <h3>1. Supabase Connection Test</h3>
+        <button onclick="testConnection()">Test Connection</button>
+        <div id="connectionResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>2. Authentication Test</h3>
+        <button onclick="testAuth()">Test Authentication</button>
+        <div id="authResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>3. Admin Role Test</h3>
+        <button onclick="testAdminRole()">Test Admin Role</button>
+        <div id="adminResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>4. Database Test</h3>
+        <button onclick="testDatabase()">Test Database Access</button>
+        <div id="dbResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>5. Complete Admin Test</h3>
+        <button onclick="testComplete()">Run Complete Test</button>
+        <div id="completeResult"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="env-loader.js"></script>
+    <script src="config.js"></script>
+    <script src="admin-middleware.js"></script>
+    
+    <script>
+        let supabaseClient;
+
+        // Initialize Supabase
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Sačekaj da se config učita
+                setTimeout(() => {
+                    if (window.APP_CONFIG) {
+                        supabaseClient = supabase.createClient(
+                            window.APP_CONFIG.SUPABASE_URL, 
+                            window.APP_CONFIG.SUPABASE_ANON_KEY
+                        );
+                        console.log('Supabase initialized:', supabaseClient);
+                    } else {
+                        console.error('APP_CONFIG not loaded');
+                    }
+                }, 100);
+            } catch (error) {
+                console.error('Supabase initialization error:', error);
+            }
+        });
+
+        function logResult(elementId, data, isError = false) {
+            const element = document.getElementById(elementId);
+            element.className = isError ? 'error' : 'success';
+            element.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+
+        async function testConnection() {
+            try {
+                const result = {
+                    supabase_url: window.APP_CONFIG?.SUPABASE_URL ? 'SET' : 'NOT SET',
+                    supabase_anon_key: window.APP_CONFIG?.SUPABASE_ANON_KEY ? 'SET' : 'NOT SET',
+                    supabase_client: supabaseClient ? 'INITIALIZED' : 'NOT INITIALIZED',
+                    app_config: window.APP_CONFIG ? 'LOADED' : 'NOT LOADED',
+                    env_loader: window.envLoader ? 'LOADED' : 'NOT LOADED'
+                };
+                logResult('connectionResult', result);
+            } catch (error) {
+                logResult('connectionResult', { error: error.message }, true);
+            }
+        }
+
+        async function testAuth() {
+            try {
+                const { data: { session }, error } = await supabaseClient.auth.getSession();
+                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+                
+                const result = {
+                    session: session ? {
+                        user_id: session.user.id,
+                        email: session.user.email,
+                        expires_at: session.expires_at
+                    } : null,
+                    user: user ? {
+                        id: user.id,
+                        email: user.email
+                    } : null,
+                    session_error: error?.message || null,
+                    user_error: userError?.message || null
+                };
+                
+                logResult('authResult', result, !!(error || userError));
+            } catch (error) {
+                logResult('authResult', { error: error.message }, true);
+            }
+        }
+
+        async function testAdminRole() {
+            try {
+                if (window.AdminMiddleware) {
+                    const authResult = await window.AdminMiddleware.checkAdminAuth(supabaseClient);
+                    logResult('adminResult', authResult, !authResult.isAdmin);
+                } else {
+                    logResult('adminResult', { error: 'AdminMiddleware not loaded' }, true);
+                }
+            } catch (error) {
+                logResult('adminResult', { error: error.message }, true);
+            }
+        }
+
+        async function testDatabase() {
+            try {
+                // Test basic database access
+                const { data, error } = await supabaseClient
+                    .from('appointments')
+                    .select('count')
+                    .limit(1);
+                
+                const result = {
+                    basic_access: error ? 'FAILED' : 'SUCCESS',
+                    error: error?.message || null
+                };
+                
+                // Test admin function if available
+                try {
+                    const { data: adminTest, error: adminError } = await supabaseClient
+                        .rpc('is_admin');
+                    result.admin_function = adminError ? 'FAILED' : 'SUCCESS';
+                    result.admin_function_result = adminTest;
+                    result.admin_function_error = adminError?.message || null;
+                } catch (adminErr) {
+                    result.admin_function = 'NOT AVAILABLE';
+                    result.admin_function_error = adminErr.message;
+                }
+                
+                logResult('dbResult', result, !!error);
+            } catch (error) {
+                logResult('dbResult', { error: error.message }, true);
+            }
+        }
+
+        async function testComplete() {
+            try {
+                console.log('Starting complete admin test...');
+                
+                // Step 1: Check connection
+                const connectionOk = supabaseClient && window.APP_CONFIG?.SUPABASE_URL && window.APP_CONFIG?.SUPABASE_ANON_KEY;
+                
+                // Step 2: Check authentication
+                const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+                const authenticated = session && session.user;
+                
+                // Step 3: Check admin role
+                let adminCheck = null;
+                if (window.AdminMiddleware) {
+                    adminCheck = await window.AdminMiddleware.checkAdminAuth(supabaseClient);
+                }
+                
+                // Step 4: Test database access
+                const { data: dbTest, error: dbError } = await supabaseClient
+                    .from('appointments')
+                    .select('count')
+                    .limit(1);
+                
+                const result = {
+                    step1_connection: connectionOk ? 'PASS' : 'FAIL',
+                    step2_authentication: authenticated ? 'PASS' : 'FAIL',
+                    step3_admin_check: adminCheck ? (adminCheck.isAdmin ? 'PASS' : 'FAIL') : 'SKIP',
+                    step4_database_access: dbError ? 'FAIL' : 'PASS',
+                    details: {
+                        user_email: session?.user?.email || 'NOT AUTHENTICATED',
+                        admin_result: adminCheck,
+                        db_error: dbError?.message || null
+                    }
+                };
+                
+                const hasErrors = !connectionOk || !authenticated || (adminCheck && !adminCheck.isAdmin) || dbError;
+                logResult('completeResult', result, hasErrors);
+                
+            } catch (error) {
+                logResult('completeResult', { error: error.message }, true);
+            }
+        }
+    </script>
+</body>
+</html>

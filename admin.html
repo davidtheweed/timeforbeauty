@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakazivanje Termina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <h1 class="brand-title">TimeForBeauty</h1>
+        <div class="header-controls">
+            <button id="backBtn" class="back-btn" style="display: none;">Nazad</button>
+            <button id="logoutBtn" class="logout-btn" style="display: none;">Logout</button>
+            <div id="authLoading" class="auth-loading" style="display: none;">
+                <div class="mini-spinner"></div>
+                <span>Proverava se...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Proverava se autentifikacija...</h2>
+            <p>Molimo sačekajte...</p>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <span class="close" id="closeLoginModal">&times;</span>
+            </div>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminEmail">Email:</label>
+                    <input type="email" id="adminEmail" name="adminEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">Password:</label>
+                    <input type="password" id="adminPassword" name="adminPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="taskModal" class="task-modal">
+        <div class="task-modal-content">
+            <div class="task-modal-header">
+                <h3 id="taskModalTitle">Dodaj novu obavezu</h3>
+                <span class="task-modal-close" id="closeTaskModal">&times;</span>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskWorker">Radnik *</label>
+                    <select id="taskWorker" name="taskWorker" required>
+                        <option value="">Izaberite radnika</option>
+                        <option value="radnik1">Radnik 1</option>
+                        <option value="radnik2">Radnik 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskDuration">Vreme trajanja obaveze *</label>
+                    <select id="taskDuration" name="taskDuration" required>
+                        <option value="">Izaberite trajanje</option>
+                        <option value="15">15 minuta</option>
+                        <option value="30">30 minuta</option>
+                        <option value="45">45 minuta</option>
+                        <option value="60">1 sat</option>
+                        <option value="90">1.5 sata</option>
+                        <option value="120">2 sata</option>
+                        <option value="180">3 sata</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskDate">Datum *</label>
+                    <div class="date-picker-container">
+                        <input type="text" id="taskDate" name="taskDate" autocomplete="off" required readonly placeholder="Kliknite da izaberete datum">
+                        <div id="taskCalendar" class="calendar-widget" style="display: none;">
+                            <div class="calendar-header">
+                                <button type="button" id="taskPrevMonth">&lt;</button>
+                                <span id="taskMonthYear"></span>
+                                <button type="button" id="taskNextMonth">&gt;</button>
+                            </div>
+                            <div class="calendar-days">
+                                <div class="day-header">PON</div>
+                                <div class="day-header">UTO</div>
+                                <div class="day-header">SRE</div>
+                                <div class="day-header">ČET</div>
+                                <div class="day-header">PET</div>
+                                <div class="day-header">SUB</div>
+                                <div class="day-header">NED</div>
+                                <div id="taskCalendarDates" class="calendar-dates"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="taskTime">Vreme *</label>
+                    <div class="time-picker-container">
+                        <input type="text" id="taskTime" name="taskTime" autocomplete="off" required readonly placeholder="Kliknite da izaberete vreme">
+                        <div id="taskTimePicker" class="time-picker-widget" style="display: none;">
+                            <div class="time-picker-header">
+                                <span id="taskSelectedDateDisplay"></span>
+                            </div>
+                            <div class="time-slots" id="taskTimeSlots">
+                                <div class="time-slot" data-time="09:00">09:00</div>
+                                <div class="time-slot" data-time="09:15">09:15</div>
+                                <div class="time-slot" data-time="09:30">09:30</div>
+                                <div class="time-slot" data-time="09:45">09:45</div>
+                                <div class="time-slot" data-time="10:00">10:00</div>
+                                <div class="time-slot" data-time="10:15">10:15</div>
+                                <div class="time-slot" data-time="10:30">10:30</div>
+                                <div class="time-slot" data-time="10:45">10:45</div>
+                                <div class="time-slot" data-time="11:00">11:00</div>
+                                <div class="time-slot" data-time="11:15">11:15</div>
+                                <div class="time-slot" data-time="11:30">11:30</div>
+                                <div class="time-slot" data-time="11:45">11:45</div>
+                                <div class="time-slot" data-time="12:00">12:00</div>
+                                <div class="time-slot" data-time="12:15">12:15</div>
+                                <div class="time-slot" data-time="12:30">12:30</div>
+                                <div class="time-slot" data-time="12:45">12:45</div>
+                                <div class="time-slot" data-time="13:00">13:00</div>
+                                <div class="time-slot" data-time="13:15">13:15</div>
+                                <div class="time-slot" data-time="13:30">13:30</div>
+                                <div class="time-slot" data-time="13:45">13:45</div>
+                                <div class="time-slot" data-time="14:00">14:00</div>
+                                <div class="time-slot" data-time="14:15">14:15</div>
+                                <div class="time-slot" data-time="14:30">14:30</div>
+                                <div class="time-slot" data-time="14:45">14:45</div>
+                                <div class="time-slot" data-time="15:00">15:00</div>
+                                <div class="time-slot" data-time="15:15">15:15</div>
+                                <div class="time-slot" data-time="15:30">15:30</div>
+                                <div class="time-slot" data-time="15:45">15:45</div>
+                                <div class="time-slot" data-time="16:00">16:00</div>
+                                <div class="time-slot" data-time="16:15">16:15</div>
+                                <div class="time-slot" data-time="16:30">16:30</div>
+                                <div class="time-slot" data-time="16:45">16:45</div>
+                                <div class="time-slot" data-time="17:00">17:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Opis (opciono)</label>
+                    <textarea id="taskDescription" name="taskDescription" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Sačuvaj obavezu</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Appointment Modal -->
+    <div id="editModal" class="task-modal">
+        <div class="task-modal-content">
+            <div class="task-modal-header">
+                <h3 id="editModalTitle">Izmeni termin</h3>
+                <span class="task-modal-close" id="closeEditModal">&times;</span>
+            </div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editDate">Datum *</label>
+                    <div class="date-picker-container">
+                        <input type="text" id="editDate" name="editDate" autocomplete="off" required readonly placeholder="Kliknite da izaberete datum">
+                        <div id="editCalendar" class="calendar-widget" style="display: none;">
+                            <div class="calendar-header">
+                                <button type="button" id="editPrevMonth">&lt;</button>
+                                <span id="editMonthYear"></span>
+                                <button type="button" id="editNextMonth">&gt;</button>
+                            </div>
+                            <div class="calendar-days">
+                                <div class="day-header">PON</div>
+                                <div class="day-header">UTO</div>
+                                <div class="day-header">SRE</div>
+                                <div class="day-header">ČET</div>
+                                <div class="day-header">PET</div>
+                                <div class="day-header">SUB</div>
+                                <div class="day-header">NED</div>
+                                <div id="editCalendarDates" class="calendar-dates"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editTime">Vreme *</label>
+                    <div class="time-picker-container">
+                        <input type="text" id="editTime" name="editTime" autocomplete="off" required readonly placeholder="Izaberite datum pa zatim vreme">
+                        <div id="editTimePicker" class="time-picker-widget" style="display: none;">
+                            <div class="time-header">
+                                <span id="editSelectedDateDisplay"></span>
+                            </div>
+                            <div class="time-slots">
+                                <div class="time-slot" data-time="09:00">09:00</div>
+                                <div class="time-slot" data-time="09:15">09:15</div>
+                                <div class="time-slot" data-time="09:30">09:30</div>
+                                <div class="time-slot" data-time="09:45">09:45</div>
+                                <div class="time-slot" data-time="10:00">10:00</div>
+                                <div class="time-slot" data-time="10:15">10:15</div>
+                                <div class="time-slot" data-time="10:30">10:30</div>
+                                <div class="time-slot" data-time="10:45">10:45</div>
+                                <div class="time-slot" data-time="11:00">11:00</div>
+                                <div class="time-slot" data-time="11:15">11:15</div>
+                                <div class="time-slot" data-time="11:30">11:30</div>
+                                <div class="time-slot" data-time="11:45">11:45</div>
+                                <div class="time-slot" data-time="12:00">12:00</div>
+                                <div class="time-slot" data-time="12:15">12:15</div>
+                                <div class="time-slot" data-time="12:30">12:30</div>
+                                <div class="time-slot" data-time="12:45">12:45</div>
+                                <div class="time-slot" data-time="13:00">13:00</div>
+                                <div class="time-slot" data-time="13:15">13:15</div>
+                                <div class="time-slot" data-time="13:30">13:30</div>
+                                <div class="time-slot" data-time="13:45">13:45</div>
+                                <div class="time-slot" data-time="14:00">14:00</div>
+                                <div class="time-slot" data-time="14:15">14:15</div>
+                                <div class="time-slot" data-time="14:30">14:30</div>
+                                <div class="time-slot" data-time="14:45">14:45</div>
+                                <div class="time-slot" data-time="15:00">15:00</div>
+                                <div class="time-slot" data-time="15:15">15:15</div>
+                                <div class="time-slot" data-time="15:30">15:30</div>
+                                <div class="time-slot" data-time="15:45">15:45</div>
+                                <div class="time-slot" data-time="16:00">16:00</div>
+                                <div class="time-slot" data-time="16:15">16:15</div>
+                                <div class="time-slot" data-time="16:30">16:30</div>
+                                <div class="time-slot" data-time="16:45">16:45</div>
+                                <div class="time-slot" data-time="17:00">17:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editService">Usluga *</label>
+                    <select id="editService" name="editService" required>
+                        <option value="">Izaberite uslugu</option>
+                        <option value="konsultacija">Konsultacija</option>
+                        <option value="pregled">Pregled</option>
+                        <option value="terapija">Terapija</option>
+                        <option value="masaža">Masaža</option>
+                        <option value="drugo">Drugo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editNotes">Napomena</label>
+                    <textarea id="editNotes" name="editNotes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Sačuvaj izmene</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Calendar Modal for Radnik 1 -->
+    <div id="calendarModal1" class="calendar-modal">
+        <div class="calendar-modal-content">
+            <div class="calendar-modal-header">
+                <h3>Kalendar termina - Radnik 1</h3>
+                <span class="calendar-modal-close" id="closeCalendarModal1">&times;</span>
+            </div>
+            <div class="planner-calendar" id="plannerCalendar1">
+                <div class="planner-calendar-header">
+                    <button id="plannerPrevMonth1" class="planner-nav-btn">&lt;</button>
+                    <span id="plannerMonthYear1"></span>
+                    <button id="plannerNextMonth1" class="planner-nav-btn">&gt;</button>
+                </div>
+                <div class="planner-calendar-days">
+                    <div class="planner-day-header">PON</div>
+                    <div class="planner-day-header">UTO</div>
+                    <div class="planner-day-header">SRE</div>
+                    <div class="planner-day-header">ČET</div>
+                    <div class="planner-day-header">PET</div>
+                    <div class="planner-day-header">SUB</div>
+                    <div class="planner-day-header">NED</div>
+                    <div id="plannerCalendarDates1" class="planner-calendar-dates"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Modal for Radnik 2 -->
+    <div id="calendarModal2" class="calendar-modal">
+        <div class="calendar-modal-content">
+            <div class="calendar-modal-header">
+                <h3>Kalendar termina - Radnik 2</h3>
+                <span class="calendar-modal-close" id="closeCalendarModal2">&times;</span>
+            </div>
+            <div class="planner-calendar" id="plannerCalendar2">
+                <div class="planner-calendar-header">
+                    <button id="plannerPrevMonth2" class="planner-nav-btn">&lt;</button>
+                    <span id="plannerMonthYear2"></span>
+                    <button id="plannerNextMonth2" class="planner-nav-btn">&gt;</button>
+                </div>
+                <div class="planner-calendar-days">
+                    <div class="planner-day-header">PON</div>
+                    <div class="planner-day-header">UTO</div>
+                    <div class="planner-day-header">SRE</div>
+                    <div class="planner-day-header">ČET</div>
+                    <div class="planner-day-header">PET</div>
+                    <div class="planner-day-header">SUB</div>
+                    <div class="planner-day-header">NED</div>
+                    <div id="plannerCalendarDates2" class="planner-calendar-dates"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="registration-modal">
+        <div class="registration-modal-content">
+            <div class="registration-modal-header">
+                <h3>Registruj novog korisnika</h3>
+                <span class="registration-modal-close" id="closeRegistrationModal">&times;</span>
+            </div>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="regFirstName">Ime *</label>
+                    <input type="text" id="regFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regLastName">Prezime *</label>
+                    <input type="text" id="regLastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email *</label>
+                    <input type="email" id="regEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Broj telefona *</label>
+                    <input type="tel" id="regPhone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Šifra *</label>
+                    <input type="password" id="regPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Potvrda šifre *</label>
+                    <input type="password" id="regConfirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Registruj korisnika</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Planner -->
+    <div id="adminPlanner" class="admin-planner" style="display: none;">
+        <div class="planner-header">
+            <h2>Planer</h2>
+            <div class="planner-controls">
+                <button id="addTaskBtn" class="add-task-btn">+ Dodaj obavezu</button>
+                <button id="registerUserBtn" class="register-user-btn">+ Registruj korisnika</button>
+            </div>
+        </div>
+        
+        <div class="planner-content">
+            <!-- Dual Planner Layout -->
+            <div class="dual-planner-container">
+                <!-- Radnik 1 Planner -->
+                <div class="worker-planner" data-worker="radnik1">
+                    <div class="worker-planner-header">
+                        <h3>Radnik 1</h3>
+                        <div class="worker-specialization">Specijalista za masažu i terapiju</div>
+                    </div>
+                    <div class="daily-view">
+                        <div class="day-header">
+                            <h4 id="selectedDayTitle1">Danas</h4>
+                            <span id="selectedDateDisplay1"></span>
+                        </div>
+            <div class="planner-navigation">
+                <div class="calendar-button-container">
+                                <button id="showCalendarBtn1" class="show-calendar-btn">Prikaži kalendar</button>
+                            </div>
+                        </div>
+                        <div id="tasksContainer1" class="tasks-container">
+                            <!-- Radnik 1 tasks will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Radnik 2 Planner -->
+                <div class="worker-planner" data-worker="radnik2">
+                    <div class="worker-planner-header">
+                        <h3>Radnik 2</h3>
+                        <div class="worker-specialization">Specijalista za konsultacije i preglede</div>
+            </div>
+            <div class="daily-view">
+                <div class="day-header">
+                            <h4 id="selectedDayTitle2">Danas</h4>
+                            <span id="selectedDateDisplay2"></span>
+                        </div>
+                        <div class="planner-navigation">
+                            <div class="calendar-button-container">
+                                <button id="showCalendarBtn2" class="show-calendar-btn">Prikaži kalendar</button>
+                            </div>
+                        </div>
+                        <div id="tasksContainer2" class="tasks-container">
+                            <!-- Radnik 2 tasks will be loaded here -->
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Admin Login Section -->
+    <div id="mainContainer" class="container">
+        <header>
+            <h1>Admin Panel</h1>
+            <p>Molimo ulogujte se za pristup admin funkcionalnostima</p>
+        </header>
+
+        <div class="admin-login-section">
+            <p>Za pristup admin panelu, molimo kliknite dugme ispod:</p>
+            <button id="adminLoginBtn" class="admin-login-btn">Admin Login</button>
+        </div>
+
+
+
+
+
+        <div id="message" class="message" style="display: none;"></div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2" 
+            crossorigin="anonymous"></script>
+    <script src="env-loader.js"></script>
+    <script src="config.js"></script>
+    <script src="validation.js"></script>
+    <script src="sanitizer.js"></script>
+    <script src="rate-limiter.js"></script>
+    <script src="csrf-protection.js"></script>
+    <script src="security-headers.js"></script>
+    <script src="auth-check.js"></script>
+    <script src="admin-middleware.js"></script>
+    <script src="admin-protection-update.js"></script>
+    <script src="script.js?v=35"></script>
+    <script>
+        // Proveri admin pristup kada se stranica učita
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Admin stranica DOMContentLoaded');
+            
+            // Inicijalizuj security headers
+            if (window.SecurityHeaders) {
+                window.SecurityHeaders.initializeSecurityHeaders();
+            }
+            
+            // Inicijalizuj CSRF zaštitu
+            if (window.CSRFProtection) {
+                window.CSRFProtection.initializeCSRFProtection();
+            }
+            
+            // Prikaži mini loading indikator
+            const authLoading = document.getElementById('authLoading');
+            if (authLoading) {
+                authLoading.style.display = 'flex';
+            }
+            
+            // Proveri admin pristup sa timeout-om
+            try {
+                const authPromise = checkAdminAccess();
+                const timeoutPromise = new Promise((_, reject) => 
+                    setTimeout(() => reject(new Error('Timeout')), 3000)
+                );
+                await Promise.race([authPromise, timeoutPromise]);
+            } catch (error) {
+                console.log('Timeout ili greška pri proveri autentifikacije:', error);
+                // Nastavi normalno - dozvoli pristup appointment formi
+            } finally {
+                // Sakrij loading indikator
+                if (authLoading) {
+                    authLoading.style.display = 'none';
+                }
+            }
+        });
+        
+        // Proverava se samo jednom u DOMContentLoaded event-u
+    </script>
+</body>
+</html>

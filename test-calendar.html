@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Kalendar</title>
+    <style>
+        .date-input-container {
+            position: relative;
+            width: 300px;
+            margin: 50px;
+        }
+
+        .date-input-container input[type="text"] {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .calendar-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .calendar-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #ff9ec7;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            margin-top: 5px;
+            padding: 15px;
+            display: none;
+            min-width: 280px;
+        }
+
+        .calendar-dropdown.show {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .calendar-header h4 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .calendar-nav {
+            background: #ff9ec7;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 700;
+            color: #666;
+            padding: 6px 2px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: #f8f9fa;
+            color: #333;
+            min-height: 28px;
+        }
+
+        .calendar-day:hover {
+            background: #ff9ec7;
+            color: white;
+        }
+
+        .calendar-day.empty {
+            background: transparent;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Kalendar - Septembar 2025</h1>
+    
+    <div class="date-input-container">
+        <input type="text" id="date" name="date" readonly placeholder="Izaberite datum">
+        <div class="calendar-icon" id="calendarIcon">📅</div>
+        <div id="calendarDropdown" class="calendar-dropdown">
+            <div class="calendar-header">
+                <button type="button" class="calendar-nav" id="prevMonth">‹</button>
+                <h4 id="currentMonth">Septembar 2025</h4>
+                <button type="button" class="calendar-nav" id="nextMonth">›</button>
+            </div>
+            <div class="calendar-grid">
+                <div class="calendar-day-header">PON</div>
+                <div class="calendar-day-header">UTO</div>
+                <div class="calendar-day-header">SRE</div>
+                <div class="calendar-day-header">ČET</div>
+                <div class="calendar-day-header">PET</div>
+                <div class="calendar-day-header">SUB</div>
+                <div class="calendar-day-header">NED</div>
+                <div id="calendarDays"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('Test script pokrenut');
+        
+        const dateInput = document.getElementById('date');
+        const calendarIcon = document.getElementById('calendarIcon');
+        const calendarDropdown = document.getElementById('calendarDropdown');
+        const currentMonthElement = document.getElementById('currentMonth');
+        const calendarDays = document.getElementById('calendarDays');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        
+        let currentMonth = 8; // Septembar (0-based)
+        let currentYear = 2025;
+        
+        const monthNames = [
+            'Januar', 'Februar', 'Mart', 'April', 'Maj', 'Jun',
+            'Jul', 'Avgust', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'
+        ];
+        
+        function createCalendarDays() {
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            
+            console.log(`Kreiram kalendar za ${monthNames[currentMonth]} ${currentYear}`);
+            console.log(`Broj dana u mesecu: ${daysInMonth}`);
+            console.log(`Prvi dan meseca (0=nedelja, 1=ponedeljak, itd.): ${firstDayOfMonth}`);
+            
+            // Konvertujemo JavaScript dani u naš format (ponedeljak = 0, nedelja = 6)
+            let adjustedFirstDay;
+            if (firstDayOfMonth === 0) { // nedelja
+                adjustedFirstDay = 6;
+            } else {
+                adjustedFirstDay = firstDayOfMonth - 1; // ponedeljak = 0, utorak = 1, itd.
+            }
+            
+            console.log(`Prilagođeni prvi dan (0=ponedeljak, 6=nedelja): ${adjustedFirstDay}`);
+            
+            let daysHTML = '';
+            
+            // Prazni dani na početku meseca
+            for (let i = 0; i < adjustedFirstDay; i++) {
+                daysHTML += '<div class="calendar-day empty"></div>';
+            }
+            console.log(`Dodao ${adjustedFirstDay} praznih dana na početak`);
+            
+            // Dani u mesecu
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                
+                daysHTML += `
+                    <div class="calendar-day clickable" data-date="${dateString}">
+                        ${day}
+                    </div>
+                `;
+            }
+            
+            console.log(`Dodao ${daysInMonth} dana u mesecu`);
+            console.log(`Ukupno elemenata: ${adjustedFirstDay + daysInMonth}`);
+            
+            calendarDays.innerHTML = daysHTML;
+            
+            // Dodavanje event listener-a za dostupne dane
+            const clickableDays = calendarDays.querySelectorAll('.calendar-day.clickable');
+            clickableDays.forEach(day => {
+                day.addEventListener('click', () => {
+                    const selectedDate = day.dataset.date;
+                    const dateObj = new Date(selectedDate);
+                    const formattedDate = dateObj.toLocaleDateString('sr-RS');
+                    dateInput.value = formattedDate;
+                    hideCalendar();
+                    console.log(`Selektovan datum: ${selectedDate}`);
+                });
+            });
+            
+            console.log(`Dodao event listener-e za ${clickableDays.length} dostupnih dana`);
+        }
+        
+        function showCalendar() {
+            console.log('showCalendar pozvana');
+            calendarDropdown.classList.add('show');
+            createCalendarDays();
+        }
+        
+        function hideCalendar() {
+            console.log('hideCalendar pozvana');
+            calendarDropdown.classList.remove('show');
+        }
+        
+        function navigateMonth(direction) {
+            if (direction === 'prev') {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+            } else {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+            }
+            
+            currentMonthElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            createCalendarDays();
+        }
+        
+        dateInput.addEventListener('click', showCalendar);
+        calendarIcon.addEventListener('click', showCalendar);
+        prevMonthBtn.addEventListener('click', () => navigateMonth('prev'));
+        nextMonthBtn.addEventListener('click', () => navigateMonth('next'));
+        
+        // Zatvaranje klikom van kalendara
+        document.addEventListener('click', (event) => {
+            if (!dateInput.contains(event.target) && 
+                !calendarIcon.contains(event.target) && 
+                !calendarDropdown.contains(event.target)) {
+                hideCalendar();
+            }
+        });
+        
+        console.log('Event listener-i dodani');
+    </script>
+</body>
+</html>
+
