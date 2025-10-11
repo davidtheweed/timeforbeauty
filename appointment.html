@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeForBeauty - Zakazivanje Termina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <h1 class="brand-title">TimeForBeauty</h1>
+        <div class="header-controls">
+            <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Appointment Form -->
+    <div id="mainContainer" class="container">
+        <header>
+            <h1>Zakažite Vaš Termin</h1>
+            <p>Popunite formu ispod da biste zatražili termin</p>
+        </header>
+
+        <form id="appointmentForm" class="appointment-form">
+
+            <div class="form-group">
+                <label>Radnik *</label>
+                <div class="worker-selection">
+                    <div class="worker-card" data-worker="radnik1">
+                        <div class="worker-avatar">
+                            <span class="worker-initial">R1</span>
+                        </div>
+                        <div class="worker-info">
+                            <h3>Radnik 1</h3>
+                            <p>Specijalista za masažu i terapiju</p>
+                        </div>
+                        <div class="worker-check">
+                            <input type="radio" name="worker" value="radnik1" id="worker1" required>
+                            <label for="worker1"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="worker-card" data-worker="radnik2">
+                        <div class="worker-avatar">
+                            <span class="worker-initial">R2</span>
+                        </div>
+                        <div class="worker-info">
+                            <h3>Radnik 2</h3>
+                            <p>Specijalista za konsultacije i preglede</p>
+                        </div>
+                        <div class="worker-check">
+                            <input type="radio" name="worker" value="radnik2" id="worker2" required>
+                            <label for="worker2"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="service">Usluga *</label>
+                <div class="service-selection">
+                    <div class="service-category">
+                        <h4>NOKTI</h4>
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="manikir" data-price="700" data-duration="30">
+                                <span class="service-name">Manikir</span>
+                                <span class="service-price">700 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="lakiranje" data-price="400" data-duration="30">
+                                <span class="service-name">Lakiranje</span>
+                                <span class="service-price">400 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="urasli_nokat" data-price="1000" data-duration="30">
+                                <span class="service-name">Urasli nokat</span>
+                                <span class="service-price">1000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="izlivanje_m" data-price="2500" data-duration="75">
+                                <span class="service-name">Izlivanje noktiju (M)</span>
+                                <span class="service-price">2500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="izlivanje_l" data-price="3000" data-duration="75">
+                                <span class="service-name">Izlivanje noktiju (L)</span>
+                                <span class="service-price">3000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="izlivanje_xl" data-price="3500" data-duration="90">
+                                <span class="service-name">Izlivanje noktiju (XL)</span>
+                                <span class="service-price">3500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="ojacavanje_s" data-price="1800" data-duration="45">
+                                <span class="service-name">Ojačavanje (S)</span>
+                                <span class="service-price">1800 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="ojacavanje_m" data-price="1900" data-duration="60">
+                                <span class="service-name">Ojačavanje (M)</span>
+                                <span class="service-price">1900 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="ojacavanje_l" data-price="2300" data-duration="60">
+                                <span class="service-name">Ojačavanje (L)</span>
+                                <span class="service-price">2300 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="gel_lak_m" data-price="1800" data-duration="45">
+                                <span class="service-name">Gel lak (M)</span>
+                                <span class="service-price">1800 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="gel_lak_l" data-price="2300" data-duration="45">
+                                <span class="service-name">Gel lak (L)</span>
+                                <span class="service-price">2300 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="korekcija_noktiju_s" data-price="2000" data-duration="45">
+                                <span class="service-name">Korekcija noktiju (S)</span>
+                                <span class="service-price">2000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="korekcija_noktiju_m" data-price="2500" data-duration="45">
+                                <span class="service-name">Korekcija noktiju (M)</span>
+                                <span class="service-price">2500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="korekcija_noktiju_l" data-price="2800" data-duration="60">
+                                <span class="service-name">Korekcija noktiju (L)</span>
+                                <span class="service-price">2800 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="korekcija_noktiju_xl" data-price="3500" data-duration="75">
+                                <span class="service-name">Korekcija noktiju (XL)</span>
+                                <span class="service-price">3500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="badem_nokti_korekcija" data-price="2700" data-duration="75">
+                                <span class="service-name">Badem nokti korekcija (L)</span>
+                                <span class="service-price">2700 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="skidanje_gela" data-price="700" data-duration="30">
+                                <span class="service-name">Skidanje gela</span>
+                                <span class="service-price">700 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="saranje_dva_nokta" data-price="250" data-duration="10">
+                                <span class="service-name">Šaranje dva nokta</span>
+                                <span class="service-price">250 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="medicinski_pedikir" data-price="3000" data-duration="60">
+                                <span class="service-name">Medicinski pedikir</span>
+                                <span class="service-price">3000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="protetika_noznog_nokta" data-price="1000" data-duration="30">
+                                <span class="service-name">Protetika nožnog nokta</span>
+                                <span class="service-price">1000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="pedikir" data-price="2500" data-duration="45">
+                                <span class="service-name">Pedikir</span>
+                                <span class="service-price">2500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="kopca_noznog_nokta" data-price="8000" data-duration="60">
+                                <span class="service-name">Kopča nožnog nokta</span>
+                                <span class="service-price">8000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="izlivanje_jednog_nokta" data-price="300" data-duration="10">
+                                <span class="service-name">Izlivanje jednog nokta</span>
+                                <span class="service-price">300 din</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="service-category">
+                        <h4>TRETMANI LICA</h4>
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="higijenski_tretman" data-price="3000" data-duration="75">
+                                <span class="service-name">Higijenski tretman</span>
+                                <span class="service-price">3000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="mezoterapija_lica" data-price="4000" data-duration="60">
+                                <span class="service-name">Mezoterapija lica</span>
+                                <span class="service-price">4000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="masaza_lica" data-price="2000" data-duration="30">
+                                <span class="service-name">Masaža lica 30min</span>
+                                <span class="service-price">2000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="kraljevski_tretman" data-price="5000" data-duration="90">
+                                <span class="service-name">Kraljevski tretman</span>
+                                <span class="service-price">5000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="parafin" data-price="7000" data-duration="30">
+                                <span class="service-name">Parafin</span>
+                                <span class="service-price">7000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="solarijum" data-price="40" data-duration="15">
+                                <span class="service-name">Solarijum (1min/40din)</span>
+                                <span class="service-price">40 din/min</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="korektivna_sminka" data-price="2000" data-duration="30">
+                                <span class="service-name">Korektivna šminka</span>
+                                <span class="service-price">2000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="sminka" data-price="3000" data-duration="60">
+                                <span class="service-name">Šminka</span>
+                                <span class="service-price">3000 din</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="service-category">
+                        <h4>DEPILACIJA</h4>
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_prepona" data-price="500" data-duration="15">
+                                <span class="service-name">Depilacija prepona</span>
+                                <span class="service-price">500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_pola_nogu" data-price="600" data-duration="15">
+                                <span class="service-name">Depilacija pola nogu</span>
+                                <span class="service-price">600 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_intime" data-price="1000" data-duration="15">
+                                <span class="service-name">Depilacija intime</span>
+                                <span class="service-price">1000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_celih_nogu_1" data-price="1500" data-duration="30">
+                                <span class="service-name">Depilacija celih nogu</span>
+                                <span class="service-price">1500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_celih_nogu_2" data-price="1800" data-duration="30">
+                                <span class="service-name">Depilacija dugih nogu</span>
+                                <span class="service-price">1800 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_ruku" data-price="600" data-duration="15">
+                                <span class="service-name">Depilacija ruku</span>
+                                <span class="service-price">600 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_pazuha" data-price="500" data-duration="15">
+                                <span class="service-name">Depilacija pazuha</span>
+                                <span class="service-price">500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="depilacija_stomaka" data-price="500" data-duration="15">
+                                <span class="service-name">Depilacija stomaka</span>
+                                <span class="service-price">500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="nausnice" data-price="200" data-duration="15">
+                                <span class="service-name">Nausnice</span>
+                                <span class="service-price">200 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="obrve_depilacija" data-price="400" data-duration="15">
+                                <span class="service-name">Obrve</span>
+                                <span class="service-price">400 din</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="service-category">
+                        <h4>MASAŽE</h4>
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="relax_masaza" data-price="2500" data-duration="45">
+                                <span class="service-name">Relax masaža</span>
+                                <span class="service-price">2500 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="anticelulit_masaza" data-price="3000" data-duration="75">
+                                <span class="service-name">Anticelulit masaža-vakum</span>
+                                <span class="service-price">3000 din</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="service-category">
+                        <h4>OBRVE</h4>
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="puder_obrve" data-price="17000" data-duration="120">
+                                <span class="service-name">Puder obrve</span>
+                                <span class="service-price">17.000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="japanske_obrve" data-price="15000" data-duration="120">
+                                <span class="service-name">Japanske obrve</span>
+                                <span class="service-price">15.000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="korekcija_puder_obrve" data-price="3000" data-duration="75">
+                                <span class="service-name">Korekcija puder obrve</span>
+                                <span class="service-price">3.000 din</span>
+                            </label>
+                            <label class="service-option">
+                                <input type="checkbox" name="service" value="osvezavanje_japanskih_obrva" data-price="6000" data-duration="75">
+                                <span class="service-name">Osvežavanje japanskih obrva</span>
+                                <span class="service-price">6.000 din</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="selectedServices" class="selected-services" style="display: none;">
+                    <h5>Izabrane usluge:</h5>
+                    <div id="selectedServicesList"></div>
+                    <div id="totalPrice" class="total-price"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+            <div class="form-group">
+                <label for="date">Datum *</label>
+                <div class="date-picker-container">
+                    <input type="text" id="date" name="date" autocomplete="off" required readonly placeholder="Prvo izaberite radnika" disabled>
+                <div id="calendar" class="calendar-widget" style="display: none;">
+                    <div class="calendar-header">
+                        <button type="button" id="prevMonth">&lt;</button>
+                        <span id="monthYear"></span>
+                        <button type="button" id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="calendar-days">
+                        <div class="day-header">PON</div>
+                        <div class="day-header">UTO</div>
+                        <div class="day-header">SRE</div>
+                        <div class="day-header">ČET</div>
+                        <div class="day-header">PET</div>
+                        <div class="day-header">SUB</div>
+                        <div class="day-header">NED</div>
+                        <div id="calendarDates" class="calendar-dates"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label for="time">Vreme *</label>
+                <div class="time-picker-container">
+                    <input type="text" id="time" name="time" autocomplete="off" required readonly placeholder="Prvo izaberite radnika" disabled>
+                        <div id="timePicker" class="time-picker-widget" style="display: none;">
+                            <div class="time-header">
+                                <span id="selectedDateDisplay"></span>
+                            </div>
+                            <div class="time-slots">
+                                <div class="time-slot" data-time="09:00">09:00</div>
+                                <div class="time-slot" data-time="09:15">09:15</div>
+                                <div class="time-slot" data-time="09:30">09:30</div>
+                                <div class="time-slot" data-time="09:45">09:45</div>
+                                <div class="time-slot" data-time="10:00">10:00</div>
+                                <div class="time-slot" data-time="10:15">10:15</div>
+                                <div class="time-slot" data-time="10:30">10:30</div>
+                                <div class="time-slot" data-time="10:45">10:45</div>
+                                <div class="time-slot" data-time="11:00">11:00</div>
+                                <div class="time-slot" data-time="11:15">11:15</div>
+                                <div class="time-slot" data-time="11:30">11:30</div>
+                                <div class="time-slot" data-time="11:45">11:45</div>
+                                <div class="time-slot" data-time="12:00">12:00</div>
+                                <div class="time-slot" data-time="12:15">12:15</div>
+                                <div class="time-slot" data-time="12:30">12:30</div>
+                                <div class="time-slot" data-time="12:45">12:45</div>
+                                <div class="time-slot" data-time="13:00">13:00</div>
+                                <div class="time-slot" data-time="13:15">13:15</div>
+                                <div class="time-slot" data-time="13:30">13:30</div>
+                                <div class="time-slot" data-time="13:45">13:45</div>
+                                <div class="time-slot" data-time="14:00">14:00</div>
+                                <div class="time-slot" data-time="14:15">14:15</div>
+                                <div class="time-slot" data-time="14:30">14:30</div>
+                                <div class="time-slot" data-time="14:45">14:45</div>
+                                <div class="time-slot" data-time="15:00">15:00</div>
+                                <div class="time-slot" data-time="15:15">15:15</div>
+                                <div class="time-slot" data-time="15:30">15:30</div>
+                                <div class="time-slot" data-time="15:45">15:45</div>
+                                <div class="time-slot" data-time="16:00">16:00</div>
+                                <div class="time-slot" data-time="16:15">16:15</div>
+                                <div class="time-slot" data-time="16:30">16:30</div>
+                                <div class="time-slot" data-time="16:45">16:45</div>
+                                <div class="time-slot" data-time="17:00">17:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Napomena</label>
+                <textarea id="notes" name="notes" rows="4" placeholder="Dodatne informacije..." autocomplete="off"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span class="btn-text">Zakaži termin</span>
+                <span class="btn-loading" style="display: none;">Šalje se...</span>
+            </button>
+        </form>
+
+        <div id="message" class="message" style="display: none;"></div>
+        
+        <!-- Appointment Cards Container -->
+        <div id="appointmentCardsContainer" class="appointment-cards-container">
+            <!-- Cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2" 
+            crossorigin="anonymous"></script>
+    <script src="env-loader.js"></script>
+    <script src="config.js"></script>
+    <script src="validation.js"></script>
+    <script src="sanitizer.js"></script>
+    <script src="rate-limiter.js"></script>
+    <script src="csrf-protection.js"></script>
+    <script src="security-headers.js"></script>
+    <script src="auth-check.js"></script>
+    <script src="appointment.js"></script>
+    <script>
+        // Proveri client pristup kada se stranica učita
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Inicijalizuj security headers
+            if (window.SecurityHeaders) {
+                window.SecurityHeaders.initializeSecurityHeaders();
+            }
+            
+            // Inicijalizuj CSRF zaštitu
+            if (window.CSRFProtection) {
+                window.CSRFProtection.initializeCSRFProtection();
+            }
+            
+            // Worker selection se inicijalizuje u appointment.js
+            
+            // Proveri pristup nakon inicijalizacije
+            try {
+                await checkClientAccess();
+            } catch (error) {
+                console.error('Greška pri proveri pristupa:', error);
+            }
+        });
+    </script>
+</body>
+</html>

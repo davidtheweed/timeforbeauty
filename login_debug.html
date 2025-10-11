@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Debug - TimeForBeauty</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .error { color: red; }
+        .success { color: green; }
+        .info { color: blue; }
+        button {
+            background: #ff9ec7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #ff6b9d;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Login Debug - TimeForBeauty</h1>
+    
+    <div class="debug-section">
+        <h2>1. Supabase Konekcija</h2>
+        <button onclick="testConnection()">Testiraj Konekciju</button>
+        <div id="connectionResult" class="result"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>2. Test Login</h2>
+        <input type="email" id="testEmail" placeholder="Email" value="davidheh15@gmail.com">
+        <input type="password" id="testPassword" placeholder="Password">
+        <button onclick="testLogin()">Testiraj Login</button>
+        <div id="loginResult" class="result"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>3. Admin Emailovi</h2>
+        <button onclick="checkAdminEmails()">Proveri Admin Emailove</button>
+        <div id="adminResult" class="result"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>4. Session Status</h2>
+        <button onclick="checkSession()">Proveri Session</button>
+        <div id="sessionResult" class="result"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>5. Console Logovi</h2>
+        <button onclick="showConsoleLogs()">Prikaži Console Logove</button>
+        <div id="consoleResult" class="result"></div>
+    </div>
+
+    <script>
+        // Supabase konfiguracija
+        const SUPABASE_URL = 'https://mwapsdsomjjviogysbov.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13YXBzZHNvbWpqdmlvZ3lzYm92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY3NTM0MzYsImV4cCI6MjA3MjMyOTQzNn0.N5AFDfF5y6ngrXDXsQHRWb6xbccpOf3C5r5w10Uwjss';
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Console logovi
+        const originalLog = console.log;
+        const originalError = console.error;
+        const logs = [];
+        
+        console.log = function(...args) {
+            logs.push('LOG: ' + args.join(' '));
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            logs.push('ERROR: ' + args.join(' '));
+            originalError.apply(console, args);
+        };
+
+        async function testConnection() {
+            const resultDiv = document.getElementById('connectionResult');
+            resultDiv.innerHTML = 'Testiranje konekcije...';
+            
+            try {
+                const { data, error } = await supabase.from('korisnici').select('count').limit(1);
+                
+                if (error) {
+                    resultDiv.innerHTML = `<span class="error">❌ Greška konekcije: ${error.message}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="success">✅ Konekcija uspešna!</span>`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<span class="error">❌ Exception: ${err.message}</span>`;
+            }
+        }
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('loginResult');
+            const email = document.getElementById('testEmail').value;
+            const password = document.getElementById('testPassword').value;
+            
+            if (!email || !password) {
+                resultDiv.innerHTML = '<span class="error">❌ Unesite email i password</span>';
+                return;
+            }
+            
+            resultDiv.innerHTML = 'Testiranje login-a...';
+            
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) {
+                    resultDiv.innerHTML = `<span class="error">❌ Login greška: ${error.message}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="success">✅ Login uspešan!</span>
+Korisnik: ${data.user?.email}
+ID: ${data.user?.id}
+Session: ${data.session ? 'Postoji' : 'Ne postoji'}`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<span class="error">❌ Exception: ${err.message}</span>`;
+            }
+        }
+
+        async function checkAdminEmails() {
+            const resultDiv = document.getElementById('adminResult');
+            resultDiv.innerHTML = 'Proveravam admin emailove...';
+            
+            const adminEmails = ['davidheh15@gmail.com', 'timeforbeauty67n@gmail.com'];
+            
+            try {
+                // Proveri hardkodovane emailove
+                resultDiv.innerHTML = `<span class="info">📧 Hardkodovani admin emailovi:</span>
+${adminEmails.map(email => `• ${email}`).join('\n')}
+
+<span class="info">🔍 Proveravam u bazi podataka...</span>`;
+
+                const { data, error } = await supabase
+                    .from('korisnici')
+                    .select('email, role')
+                    .in('email', adminEmails);
+                
+                if (error) {
+                    resultDiv.innerHTML += `<span class="error">\n❌ Greška baze: ${error.message}</span>`;
+                } else {
+                    resultDiv.innerHTML += `<span class="success">\n✅ Rezultat iz baze:</span>
+${data.map(user => `• ${user.email} - ${user.role}`).join('\n')}`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML += `<span class="error">\n❌ Exception: ${err.message}</span>`;
+            }
+        }
+
+        async function checkSession() {
+            const resultDiv = document.getElementById('sessionResult');
+            resultDiv.innerHTML = 'Proveravam session...';
+            
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                
+                if (error) {
+                    resultDiv.innerHTML = `<span class="error">❌ Session greška: ${error.message}</span>`;
+                } else if (session) {
+                    resultDiv.innerHTML = `<span class="success">✅ Session postoji:</span>
+Email: ${session.user?.email}
+ID: ${session.user?.id}
+Expires: ${new Date(session.expires_at * 1000).toLocaleString()}`;
+                } else {
+                    resultDiv.innerHTML = '<span class="info">ℹ️ Nema aktivnog session-a</span>';
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<span class="error">❌ Exception: ${err.message}</span>`;
+            }
+        }
+
+        function showConsoleLogs() {
+            const resultDiv = document.getElementById('consoleResult');
+            resultDiv.innerHTML = logs.slice(-20).join('\n') || 'Nema logova';
+        }
+
+        // Automatski testiraj konekciju
+        window.addEventListener('load', () => {
+            testConnection();
+            checkSession();
+        });
+    </script>
+</body>
+</html>

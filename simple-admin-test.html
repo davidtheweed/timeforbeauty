@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Admin Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; }
+        .error { background-color: #f8d7da; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Simple Admin Test</h1>
+    
+    <button onclick="runTest()">Run Simple Test</button>
+    <div id="result"></div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        // Hardkodovane vrednosti za test
+        const SUPABASE_URL = 'https://mwapsdsomjjviogysbov.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13YXBzZHNvbWpqdmlvZ3lzYm92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY3NTM0MzYsImV4cCI6MjA3MjMyOTQzNn0.N5AFDfF5y6ngrXDXsQHRWb6xbccpOf3C5r5w10Uwjss';
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        async function runTest() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="result">Running test...</div>';
+            
+            const results = [];
+            
+            try {
+                // Test 1: Connection
+                results.push('✅ Supabase client created');
+                
+                // Test 2: Authentication
+                const { data: { session }, error: authError } = await supabase.auth.getSession();
+                if (authError) {
+                    results.push(`❌ Auth error: ${authError.message}`);
+                } else if (session && session.user) {
+                    results.push(`✅ Authenticated as: ${session.user.email}`);
+                } else {
+                    results.push('❌ Not authenticated - please login first');
+                }
+                
+                // Test 3: Database access
+                const { data: dbData, error: dbError } = await supabase
+                    .from('appointments')
+                    .select('count')
+                    .limit(1);
+                
+                if (dbError) {
+                    results.push(`❌ Database error: ${dbError.message}`);
+                } else {
+                    results.push('✅ Database access works');
+                }
+                
+                // Test 4: Admin function
+                try {
+                    const { data: adminResult, error: adminError } = await supabase
+                        .rpc('is_admin');
+                    
+                    if (adminError) {
+                        results.push(`❌ Admin function error: ${adminError.message}`);
+                    } else {
+                        results.push(`✅ Admin function result: ${adminResult}`);
+                    }
+                } catch (adminErr) {
+                    results.push(`❌ Admin function not available: ${adminErr.message}`);
+                }
+                
+                // Test 5: Check admin email
+                if (session && session.user && session.user.email === 'davidheh15@gmail.com') {
+                    results.push('✅ Admin email matches');
+                } else if (session && session.user) {
+                    results.push(`❌ Wrong email: ${session.user.email} (expected: davidheh15@gmail.com)`);
+                } else {
+                    results.push('❌ No user session to check email');
+                }
+                
+            } catch (error) {
+                results.push(`❌ Test failed: ${error.message}`);
+            }
+            
+            // Display results
+            const html = results.map(result => `<div class="result ${result.startsWith('✅') ? 'success' : 'error'}">${result}</div>`).join('');
+            resultDiv.innerHTML = html;
+        }
+        
+        // Auto-run test on load
+        window.addEventListener('load', () => {
+            setTimeout(runTest, 1000);
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Kalendar Grid</title>
+    <style>
+        .calendar-dropdown {
+            background: white;
+            border: 2px solid #ff9ec7;
+            border-radius: 15px;
+            padding: 15px;
+            width: 300px;
+            margin: 50px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 700;
+            color: #666;
+            padding: 6px 2px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: #f8f9fa;
+            color: #333;
+            min-height: 28px;
+        }
+
+        .calendar-day:hover {
+            background: #ff9ec7;
+            color: white;
+        }
+
+        .calendar-day.empty {
+            background: transparent;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Kalendar Grid - Septembar 2025</h1>
+    
+    <div class="calendar-dropdown">
+        <div class="calendar-grid">
+            <div class="calendar-day-header">PON</div>
+            <div class="calendar-day-header">UTO</div>
+            <div class="calendar-day-header">SRE</div>
+            <div class="calendar-day-header">ČET</div>
+            <div class="calendar-day-header">PET</div>
+            <div class="calendar-day-header">SUB</div>
+            <div class="calendar-day-header">NED</div>
+            
+            <!-- Prazni dani na početku (1. septembar je ponedeljak, tako da nema praznih dana) -->
+            
+            <!-- Dani u mesecu -->
+            <div class="calendar-day clickable">1</div>
+            <div class="calendar-day clickable">2</div>
+            <div class="calendar-day clickable">3</div>
+            <div class="calendar-day clickable">4</div>
+            <div class="calendar-day clickable">5</div>
+            <div class="calendar-day clickable">6</div>
+            <div class="calendar-day clickable">7</div>
+            <div class="calendar-day clickable">8</div>
+            <div class="calendar-day clickable">9</div>
+            <div class="calendar-day clickable">10</div>
+            <div class="calendar-day clickable">11</div>
+            <div class="calendar-day clickable">12</div>
+            <div class="calendar-day clickable">13</div>
+            <div class="calendar-day clickable">14</div>
+            <div class="calendar-day clickable">15</div>
+            <div class="calendar-day clickable">16</div>
+            <div class="calendar-day clickable">17</div>
+            <div class="calendar-day clickable">18</div>
+            <div class="calendar-day clickable">19</div>
+            <div class="calendar-day clickable">20</div>
+            <div class="calendar-day clickable">21</div>
+            <div class="calendar-day clickable">22</div>
+            <div class="calendar-day clickable">23</div>
+            <div class="calendar-day clickable">24</div>
+            <div class="calendar-day clickable">25</div>
+            <div class="calendar-day clickable">26</div>
+            <div class="calendar-day clickable">27</div>
+            <div class="calendar-day clickable">28</div>
+            <div class="calendar-day clickable">29</div>
+            <div class="calendar-day clickable">30</div>
+        </div>
+    </div>
+
+    <h2>Očekivani raspored:</h2>
+    <p>1. septembar (ponedeljak) → PON</p>
+    <p>2. septembar (utorak) → UTO</p>
+    <p>3. septembar (sreda) → SRE</p>
+    <p>4. septembar (četvrtak) → ČET</p>
+    <p>5. septembar (petak) → PET</p>
+    <p>6. septembar (subota) → SUB</p>
+    <p>7. septembar (nedelja) → NED</p>
+    <p>8. septembar (ponedeljak) → PON (novi red)</p>
+</body>
+</html>

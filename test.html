@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dropdown Kalendar</title>
+    <style>
+        .date-input-container {
+            position: relative;
+            width: 300px;
+            margin: 50px;
+        }
+
+        .date-input-container input[type="text"] {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .calendar-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .calendar-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #ff9ec7;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            margin-top: 5px;
+            padding: 20px;
+            display: none;
+        }
+
+        .calendar-dropdown.show {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .calendar-nav {
+            background: #ff9ec7;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 700;
+            color: #666;
+            padding: 10px 5px;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .calendar-day:hover {
+            background: #ff9ec7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Dropdown Kalendar</h1>
+    
+    <div class="date-input-container">
+        <input type="text" id="date" name="date" readonly placeholder="Izaberite datum">
+        <div class="calendar-icon" id="calendarIcon">📅</div>
+        <div id="calendarDropdown" class="calendar-dropdown">
+            <div class="calendar-header">
+                <button type="button" class="calendar-nav" id="prevMonth">‹</button>
+                <h4 id="currentMonth">Januar 2025</h4>
+                <button type="button" class="calendar-nav" id="nextMonth">›</button>
+            </div>
+            <div class="calendar-grid">
+                <div class="calendar-day-header">Pon</div>
+                <div class="calendar-day-header">Uto</div>
+                <div class="calendar-day-header">Sre</div>
+                <div class="calendar-day-header">Čet</div>
+                <div class="calendar-day-header">Pet</div>
+                <div class="calendar-day-header">Sub</div>
+                <div class="calendar-day-header">Ned</div>
+                <div id="calendarDays"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('Test script pokrenut');
+        
+        const dateInput = document.getElementById('date');
+        const calendarIcon = document.getElementById('calendarIcon');
+        const calendarDropdown = document.getElementById('calendarDropdown');
+        
+        console.log('Elementi:', { dateInput, calendarIcon, calendarDropdown });
+        
+        function showCalendar() {
+            console.log('showCalendar pozvana');
+            calendarDropdown.classList.add('show');
+        }
+        
+        function hideCalendar() {
+            console.log('hideCalendar pozvana');
+            calendarDropdown.classList.remove('show');
+        }
+        
+        dateInput.addEventListener('click', showCalendar);
+        calendarIcon.addEventListener('click', showCalendar);
+        
+        // Zatvaranje klikom van kalendara
+        document.addEventListener('click', (event) => {
+            if (!dateInput.contains(event.target) && 
+                !calendarIcon.contains(event.target) && 
+                !calendarDropdown.contains(event.target)) {
+                hideCalendar();
+            }
+        });
+        
+        console.log('Event listener-i dodani');
+    </script>
+</body>
+</html>

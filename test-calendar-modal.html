@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Calendar Modal</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; }
+        .error { background-color: #f8d7da; }
+        .info { background-color: #d1ecf1; }
+        button { padding: 10px 20px; margin: 5px; }
+        pre { background: #f8f9fa; padding: 10px; overflow-x: auto; }
+        
+        /* Calendar Modal Styles */
+        .calendar-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .calendar-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .calendar-modal-header {
+            background: linear-gradient(135deg, #ff9ec7, #ff6bb3);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calendar-modal-close {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Test Calendar Modal</h1>
+    
+    <div class="test-section info">
+        <h3>Test Calendar Modal Functionality</h3>
+        <button onclick="testModal1()">Test Calendar Modal 1</button>
+        <button onclick="testModal2()">Test Calendar Modal 2</button>
+        <button onclick="checkElements()">Check Elements</button>
+        <div id="testResult"></div>
+    </div>
+
+    <!-- Test Calendar Modals -->
+    <div id="calendarModal1" class="calendar-modal">
+        <div class="calendar-modal-content">
+            <div class="calendar-modal-header">
+                <h3>Kalendar termina - Radnik 1</h3>
+                <span class="calendar-modal-close" onclick="closeModal('calendarModal1')">&times;</span>
+            </div>
+            <div class="planner-calendar">
+                <p>Ovo je test modal za Radnik 1</p>
+                <p>Kalendar bi trebao da se prikaže ovde</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="calendarModal2" class="calendar-modal">
+        <div class="calendar-modal-content">
+            <div class="calendar-modal-header">
+                <h3>Kalendar termina - Radnik 2</h3>
+                <span class="calendar-modal-close" onclick="closeModal('calendarModal2')">&times;</span>
+            </div>
+            <div class="planner-calendar">
+                <p>Ovo je test modal za Radnik 2</p>
+                <p>Kalendar bi trebao da se prikaže ovde</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logResult(data, isError = false) {
+            const element = document.getElementById('testResult');
+            element.className = isError ? 'error' : 'success';
+            element.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+
+        function testModal1() {
+            console.log('Testing Calendar Modal 1...');
+            const modal = document.getElementById('calendarModal1');
+            if (modal) {
+                modal.style.display = 'block';
+                console.log('Modal 1 displayed');
+                logResult({ status: 'Modal 1 displayed successfully' });
+            } else {
+                console.error('Modal 1 not found');
+                logResult({ error: 'Modal 1 not found' }, true);
+            }
+        }
+
+        function testModal2() {
+            console.log('Testing Calendar Modal 2...');
+            const modal = document.getElementById('calendarModal2');
+            if (modal) {
+                modal.style.display = 'block';
+                console.log('Modal 2 displayed');
+                logResult({ status: 'Modal 2 displayed successfully' });
+            } else {
+                console.error('Modal 2 not found');
+                logResult({ error: 'Modal 2 not found' }, true);
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                console.log(`${modalId} closed`);
+            }
+        }
+
+        function checkElements() {
+            const elements = {
+                calendarModal1: document.getElementById('calendarModal1'),
+                calendarModal2: document.getElementById('calendarModal2'),
+                showCalendarBtn1: document.getElementById('showCalendarBtn1'),
+                showCalendarBtn2: document.getElementById('showCalendarBtn2')
+            };
+            
+            const result = {};
+            for (const [name, element] of Object.entries(elements)) {
+                result[name] = {
+                    exists: !!element,
+                    display: element ? element.style.display : null,
+                    className: element ? element.className : null
+                };
+            }
+            
+            logResult(result);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('calendar-modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Auto-check elements on load
+        window.addEventListener('load', () => {
+            setTimeout(checkElements, 1000);
+        });
+    </script>
+</body>
+</html>
+
+

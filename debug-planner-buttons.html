@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Planner Buttons</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 20px; margin: 5px; }
+        pre { background: #f8f9fa; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug Planner Buttons</h1>
+    
+    <div class="debug-section info">
+        <h3>1. Check Button Elements</h3>
+        <button onclick="checkButtonElements()">Check Elements</button>
+        <div id="elementsResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>2. Test Button Clicks</h3>
+        <button onclick="testButtonClicks()">Test Clicks</button>
+        <div id="clicksResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>3. Check Event Listeners</h3>
+        <button onclick="checkEventListeners()">Check Listeners</button>
+        <div id="listenersResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>4. Check Planner Object</h3>
+        <button onclick="checkPlannerObject()">Check Planner</button>
+        <div id="plannerResult"></div>
+    </div>
+
+    <div class="debug-section info">
+        <h3>5. Full Debug</h3>
+        <button onclick="runFullDebug()">Run Full Debug</button>
+        <div id="fullResult"></div>
+    </div>
+
+    <!-- Include the same scripts as admin.html -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="env-loader.js"></script>
+    <script src="config.js"></script>
+    <script src="validation.js"></script>
+    <script src="sanitizer.js"></script>
+    <script src="rate-limiter.js"></script>
+    <script src="csrf-protection.js"></script>
+    <script src="security-headers.js"></script>
+    <script src="auth-check.js"></script>
+    <script src="admin-middleware.js"></script>
+    <script src="admin-protection-update.js"></script>
+    <script src="script.js?v=35"></script>
+    
+    <script>
+        function logResult(elementId, data, isError = false) {
+            const element = document.getElementById(elementId);
+            element.className = isError ? 'error' : 'success';
+            element.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+
+        function checkButtonElements() {
+            const buttons = {
+                addTaskBtn: document.getElementById('addTaskBtn'),
+                registerUserBtn: document.getElementById('registerUserBtn'),
+                showCalendarBtn1: document.getElementById('showCalendarBtn1'),
+                showCalendarBtn2: document.getElementById('showCalendarBtn2'),
+                adminPlanner: document.getElementById('adminPlanner')
+            };
+            
+            const result = {};
+            for (const [name, element] of Object.entries(buttons)) {
+                result[name] = {
+                    exists: !!element,
+                    visible: element ? element.style.display !== 'none' : false,
+                    disabled: element ? element.disabled : false,
+                    className: element ? element.className : null
+                };
+            }
+            
+            logResult('elementsResult', result);
+        }
+
+        function testButtonClicks() {
+            const buttons = {
+                addTaskBtn: document.getElementById('addTaskBtn'),
+                registerUserBtn: document.getElementById('registerUserBtn'),
+                showCalendarBtn1: document.getElementById('showCalendarBtn1'),
+                showCalendarBtn2: document.getElementById('showCalendarBtn2')
+            };
+            
+            const result = {};
+            for (const [name, element] of Object.entries(buttons)) {
+                if (element) {
+                    try {
+                        // Simulate click
+                        element.click();
+                        result[name] = 'Click executed successfully';
+                    } catch (error) {
+                        result[name] = `Click error: ${error.message}`;
+                    }
+                } else {
+                    result[name] = 'Element not found';
+                }
+            }
+            
+            logResult('clicksResult', result);
+        }
+
+        function checkEventListeners() {
+            const buttons = {
+                addTaskBtn: document.getElementById('addTaskBtn'),
+                registerUserBtn: document.getElementById('registerUserBtn'),
+                showCalendarBtn1: document.getElementById('showCalendarBtn1'),
+                showCalendarBtn2: document.getElementById('showCalendarBtn2')
+            };
+            
+            const result = {};
+            for (const [name, element] of Object.entries(buttons)) {
+                if (element) {
+                    // Check if element has onclick or event listeners
+                    result[name] = {
+                        onclick: !!element.onclick,
+                        hasListeners: element._listeners ? Object.keys(element._listeners).length : 'Unknown'
+                    };
+                } else {
+                    result[name] = 'Element not found';
+                }
+            }
+            
+            logResult('listenersResult', result);
+        }
+
+        function checkPlannerObject() {
+            const result = {
+                planner: typeof window.planner,
+                plannerExists: !!window.planner,
+                plannerMethods: window.planner ? Object.getOwnPropertyNames(Object.getPrototypeOf(window.planner)) : [],
+                showTaskModal: window.planner && typeof window.planner.showTaskModal,
+                showRegistrationModal: window.planner && typeof window.planner.showRegistrationModal,
+                showCalendarModal: window.planner && typeof window.planner.showCalendarModal
+            };
+            
+            logResult('plannerResult', result);
+        }
+
+        function runFullDebug() {
+            console.log('=== FULL DEBUG START ===');
+            
+            // Check elements
+            checkButtonElements();
+            
+            // Check planner
+            checkPlannerObject();
+            
+            // Check console logs
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+                originalLog.apply(console, args);
+            };
+            
+            // Try to trigger events
+            setTimeout(() => {
+                console.log = originalLog;
+                
+                const result = {
+                    elements: {
+                        addTaskBtn: !!document.getElementById('addTaskBtn'),
+                        registerUserBtn: !!document.getElementById('registerUserBtn'),
+                        showCalendarBtn1: !!document.getElementById('showCalendarBtn1'),
+                        showCalendarBtn2: !!document.getElementById('showCalendarBtn2'),
+                        adminPlanner: !!document.getElementById('adminPlanner')
+                    },
+                    planner: {
+                        exists: !!window.planner,
+                        type: typeof window.planner
+                    },
+                    recentLogs: logs.slice(-10) // Last 10 logs
+                };
+                
+                logResult('fullResult', result);
+                console.log('=== FULL DEBUG END ===');
+            }, 1000);
+        }
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            setTimeout(runFullDebug, 2000);
+        });
+    </script>
+</body>
+</html>
+
+
